@@ -1,28 +1,28 @@
-import {createRouter, createWebHistory} from "vue-router";
-import Home from "../views/Home.vue";
-import About from "../views/About.vue";
-import PostDetail from "../views/PostDetail.vue";
+import AboutComponent from '@/views/AboutComponent.vue';
+import HomeComponent from '@/views/HomeComponent.vue';
+import PostDetail from '@/views/PostDetail.vue';
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router';
 
-
-const routes = [
-    {
-        path: '/home',
-        name: 'Home',
-        component: Home
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: About
-    },
-    {
-        path: '/post/:id', name: 'PostDetail',
-        component: PostDetail
-    }
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/home',
+    name: 'Home',
+    component: HomeComponent
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: AboutComponent
+  },
+  {
+    path: '/post/:id',
+    name: 'PostDetail',
+    component: PostDetail
+  }
 ]
 
- const router = createRouter({
-    history: createWebHistory(),
-    routes
+const router = createRouter({
+  history: createWebHashHistory('/'),
+  routes
 })
 export default router
