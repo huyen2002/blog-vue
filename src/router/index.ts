@@ -1,11 +1,12 @@
 import AboutComponent from '@/views/AboutComponent.vue';
-import HomeComponent from '@/views/HomeComponent.vue';
 import PostDetail from '@/views/PostDetail.vue';
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router';
+import HomeComponent from "@/views/HomeComponent.vue";
+import PostsComponent from "@/views/PostsComponent.vue";
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
     component: HomeComponent
   },
@@ -13,6 +14,11 @@ const routes: RouteRecordRaw[] = [
     path: '/about',
     name: 'About',
     component: AboutComponent
+  },
+  {
+    path:'/posts',
+    name:'Posts',
+    component: PostsComponent
   },
   {
     path: '/post/:id',
