@@ -4,6 +4,7 @@ import HomeView from '@/views/HomeView.vue'
 import PostsView from '@/views/PostsView.vue'
 import PostDetailView from '@/views/PostDetailView.vue'
 import ListsView from '@/views/ListsView.vue'
+import ListDetailView from '@/views/ListDetailView.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -26,6 +27,11 @@ const routes: RouteRecordRaw[] = [
     path: '/lists',
     name: 'Lists',
     component: ListsView
+  },
+  {
+    path: '/list/:id',
+    name: 'ListDetail',
+    component: ListDetailView
   }
 ]
 

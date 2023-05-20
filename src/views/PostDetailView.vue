@@ -11,7 +11,7 @@
       </div>
       <div class="relative">
         <button @click="show = !show">
-          <BookmarkFillIcon v-if="isBookmarked" />
+          <BookmarkFillIcon v-if="selectedCheckbox.length !== 0" />
           <BookmarkIcon v-else />
         </button>
         <Transition>
@@ -73,7 +73,6 @@ import { useRoute } from 'vue-router'
 import NavbarDetail from '@/components/NavbarDetail.vue'
 import BookmarkIcon from '@/components/icons/BookmarkIcon.vue'
 import BookmarkFillIcon from '@/components/icons/BookmarkFillIcon.vue'
-
 import { onMounted, type Ref, ref, watch } from 'vue'
 import type { List } from '@/models/List'
 import PopupComponent from '@/components/PopupComponent.vue'
@@ -87,9 +86,6 @@ const show = ref<boolean>(false)
 const showDialog = ref<boolean>(false)
 const nameList = ref<string>('')
 const readLists = ref<List[]>(lists)
-
-const postsEachList: Array<string[]> = lists.map((list) => list.posts)
-const isBookmarked = postsEachList.some((list) => list.includes(post.value?.id ?? ''))
 
 const allPosts = ref<Post[]>([])
 const isChecked = (id: string) => {
