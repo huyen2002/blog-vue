@@ -4,6 +4,7 @@ const Posts: Post[] = [
   {
     id: '1',
     topic: 'HTML',
+    lists: ['1'],
     author: 'Rajdeep Singh',
     bio: 'I am a front-end developer. I want to share my experience and communicate with society.',
     avatar: '/avatar.png',
@@ -24,6 +25,7 @@ const Posts: Post[] = [
   {
     id: '4',
     topic: 'HTML',
+    lists: ['2'],
     author: 'Thanh Huyen',
     bio: 'I am a front-end developer. I want to share my experience and communicate with society.',
     avatar: '/avatar.png',
@@ -44,6 +46,7 @@ const Posts: Post[] = [
   {
     id: '2',
     topic: 'Next Js',
+    lists: [],
     author: 'Rajdeep Singh',
     bio: 'I am a front-end developer. I want to share my experience and communicate with society.',
     followers: 100,
@@ -64,6 +67,7 @@ const Posts: Post[] = [
   {
     id: '3',
     topic: 'Next Js',
+    lists: [],
     author: 'Rajdeep Singh',
     bio: 'I am a front-end developer. I want to share my experience and communicate with society.',
     followers: 100,

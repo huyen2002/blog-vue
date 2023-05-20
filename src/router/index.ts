@@ -1,29 +1,31 @@
-import AboutComponent from '@/views/AboutComponent.vue';
-import PostDetail from '@/views/PostDetail.vue';
-import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router';
-import HomeComponent from "@/views/HomeComponent.vue";
-import PostsComponent from "@/views/PostsComponent.vue";
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
+
+import HomeView from '@/views/HomeView.vue'
+import PostsView from '@/views/PostsView.vue'
+import PostDetailView from '@/views/PostDetailView.vue'
+import ListsView from '@/views/ListsView.vue'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Home',
-    component: HomeComponent
+    component: HomeView
   },
+
   {
-    path: '/about',
-    name: 'About',
-    component: AboutComponent
-  },
-  {
-    path:'/posts',
-    name:'Posts',
-    component: PostsComponent
+    path: '/posts',
+    name: 'Posts',
+    component: PostsView
   },
   {
     path: '/post/:id',
     name: 'PostDetail',
-    component: PostDetail
+    component: PostDetailView
+  },
+  {
+    path: '/lists',
+    name: 'Lists',
+    component: ListsView
   }
 ]
 

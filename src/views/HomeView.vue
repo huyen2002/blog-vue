@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <div class="flex justify-between">
-      <Logo />
+  <div>
+    <div class="flex justify-between">
+      <LogoComonent />
       <div class="flex gap-10 font-montserrat items-center">
         <router-link :to="{ name: 'Posts' }" class="text-lg">Sign in</router-link>
         <button class="text-lg px-2 h-10 text-white bg-button hover:bg-buttonHover rounded-3xl">
@@ -31,10 +31,9 @@
 </template>
 
 <script lang="ts">
-import Logo from '@/components/Logo.vue'
+import LogoComonent from '@/components/LogoComponent.vue'
 
 export default {
-  components: { Logo },
-
+  components: { LogoComonent }
 }
 </script>
