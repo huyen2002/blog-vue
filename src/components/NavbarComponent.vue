@@ -19,20 +19,17 @@
       </button>
       <Transition>
         <div v-if="show" class="absolute right-0 mt-5 rounded-md w-56 shadow-lg">
-          <router-link
-            :to="{ name: 'Home' }"
-            class="block px-4 py-2 text-sm text-textNavbar hover:bg-slate-100"
-          >
+          <router-link to="/" class="block px-4 py-2 text-sm text-textNavbar hover:bg-slate-100">
             Home
           </router-link>
           <router-link
-            :to="{ name: 'Posts' }"
+            to="/posts"
             class="block px-4 py-2 text-sm text-textNavbar hover:bg-slate-100"
           >
             Posts
           </router-link>
           <router-link
-            :to="{ name: 'Lists' }"
+            to="/lists"
             class="block px-4 py-2 text-sm text-textNavbar hover:bg-slate-100"
           >
             Lists

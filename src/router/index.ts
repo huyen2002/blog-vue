@@ -1,37 +1,39 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
 
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import { Paths } from '@/router/Paths'
 import HomeView from '@/views/HomeView.vue'
-import PostsView from '@/views/PostsView.vue'
-import PostDetailView from '@/views/PostDetailView.vue'
 import ListsView from '@/views/ListsView.vue'
-import ListDetailView from '@/views/ListDetailView.vue'
+import ListView from '@/views/ListView.vue'
+import PostsView from '@/views/PostsView.vue'
+import PostView from '@/views/PostView.vue'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
-    name: 'Home',
+    path: Paths.HOME,
     component: HomeView
   },
-
   {
-    path: '/posts',
-    name: 'Posts',
+    path: Paths.POSTS,
     component: PostsView
   },
   {
-    path: '/post/:id',
-    name: 'PostDetail',
-    component: PostDetailView
-  },
-  {
-    path: '/lists',
-    name: 'Lists',
-    component: ListsView
-  },
-  {
-    path: '/list/:id',
-    name: 'ListDetail',
-    component: ListDetailView
+    path: Paths.DETAIL,
+    component: DefaultLayout,
+    children: [
+      {
+        path: Paths.POST,
+        component: PostView
+      },
+      {
+        path: Paths.LISTS,
+        component: ListsView
+      },
+      {
+        path: Paths.LIST,
+        component: ListView
+      }
+    ]
   }
 ]
 
