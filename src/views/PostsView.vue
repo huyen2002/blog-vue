@@ -1,82 +1,79 @@
 <template>
-  <NavbarComponent @search="getSearchText" />
-  <div class="flex gap-4 my-10">
-    <div v-for="topic in topicsArr" :key="topic.id">
-      <button
-        @click="handleTopicClick(topic)"
-        class="bg-slate-100 hover:bg-slate-200 p-2 rounded-xl text-textBio"
-        :class="{ 'bg-slate-200': activeTopic === topic.id }"
-      >
-        {{ topic.name }}
-      </button>
-    </div>
-  </div>
-
-  <div class="flex flex-col gap-8">
-    <div v-for="post in postsArr" :key="post.id">
-      <div class="flex gap-5">
-        <img :src="post.avatar" alt="avatar" class="h-10 w-10 rounded-full" />
-        <div>
-          <h2 class="font-semibold text-lg">{{ post.author }}</h2>
-          <p class="text-textBio text-base">{{ post.updatedAt }}</p>
-        </div>
+  <DefaultLayout>
+    <NavbarComponent @search="updateSearchText" />
+    <el-row style="margin: 2rem 0">
+      <div v-for="topic in topics" :key="topic.id" style="margin: 1rem">
+        <el-button
+          @click="handleTopicClick(topic)"
+          :style="activeTopic === topic.id ? 'background-color: #409eff; color: white' : ''"
+        >
+          {{ topic.name }}
+        </el-button>
       </div>
-      <router-link :to="/post/ + post.id">
-        <h2 class="font-semibold text-lg">{{ post.title }}</h2>
-        <p class="text-textBio text-sm">{{ post.description }}</p>
-      </router-link>
-    </div>
-  </div>
+    </el-row>
+
+    <el-space direction="vertical">
+      <div v-for="post in postsArr" :key="post.id" style="margin: 1rem 0">
+        <el-row :gutter="10" :align="'middle'">
+          <el-col :span="1">
+            <el-avatar :src="post.avatar" alt="avatar" />
+          </el-col>
+          <el-col :span="10">
+            <el-row>
+              <el-col>
+                <el-text tag="b" style="font-size: 1.125rem">{{ post.author }}</el-text>
+              </el-col>
+              <el-col>
+                <el-text style="font-size: 1rem">{{ post.updatedAt }}</el-text>
+              </el-col>
+            </el-row>
+          </el-col>
+        </el-row>
+        <router-link :to="Paths.POST(post.id)">
+          <el-row>
+            <el-col>
+              <el-text tag="b" style="font-size: 1.125rem">{{ post.title }}</el-text>
+            </el-col>
+            <el-col>
+              <el-text>{{ post.description }}</el-text>
+            </el-col>
+          </el-row>
+        </router-link>
+      </div>
+    </el-space>
+  </DefaultLayout>
 </template>
 
 <script lang="ts" setup>
-import posts from '@/assets/posts'
 import topics from '@/assets/topics'
 import { onMounted, ref, watch } from 'vue'
 import type { Topic } from '@/models/Topic'
 import type { Post } from '@/models/Post'
 import NavbarComponent from '@/components/NavbarComponent.vue'
+import { Paths } from '@/router/Paths'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import { PostService } from '@/services/PostService'
 
-const allPosts = ref<Post[]>([])
-const postsArr = ref<Post[]>(posts.filter((post) => post.topic === topics[0].name))
-
-const topicsArr = ref<Topic[]>([])
-const topic = ref<Topic>(topics[0])
+const allPosts = PostService.getAll()
+const postsArr = ref<Post[]>([])
 const activeTopic = ref<string>(topics[0].id)
 const searchText = ref<string>('')
 
-const handleTopicClick = (item: Topic) => {
-  topic.value = item
-  activeTopic.value = item.id
-  console.log(activeTopic.value)
+const handleTopicClick = (topic: Topic) => {
+  activeTopic.value = topic.id
+  postsArr.value = PostService.getPostsByTopic(topic.name)
 }
-const getSearchText = (input: string) => {
+const updateSearchText = (input: string) => {
   searchText.value = input
 }
-watch(allPosts, () => {
-  localStorage.setItem('posts', JSON.stringify(allPosts.value))
-})
-
-watch(topic, () => {
-  postsArr.value = posts.filter((post) => post.topic === topic.value.name)
-  activeTopic.value = topic.value.id
-  localStorage.setItem('topics', JSON.stringify(topicsArr.value))
-})
 
 watch(searchText, () => {
-  postsArr.value = posts.filter((post) =>
+  postsArr.value = allPosts.filter((post) =>
     post.title.toLowerCase().startsWith(searchText.value.toLowerCase())
   )
 })
 
 onMounted(() => {
-  localStorage.setItem('posts', JSON.stringify(posts))
-  localStorage.setItem('topics', JSON.stringify(topics))
-  allPosts.value = localStorage.getItem('posts')
-    ? (JSON.parse(localStorage.getItem('posts') as string) as Post[])
-    : posts
-  topicsArr.value = localStorage.getItem('topics')
-    ? (JSON.parse(localStorage.getItem('topics') as string) as Topic[])
-    : topics
+  postsArr.value = PostService.getPostsByTopic(topics[0].name)
 })
 </script>

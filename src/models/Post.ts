@@ -1,3 +1,5 @@
+import type { List } from '@/models/List'
+
 export interface Post {
   id: string
   topic: string

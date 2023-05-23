@@ -2,8 +2,9 @@ export const Paths = {
   ROOT: '/',
   HOME: '/',
   POSTS: '/posts',
-  DETAIL: '/post/:id',
-  POST: '/post/:id',
+  DETAIL: '/',
+  POST: (id: any = null) => `/post/${id || ':id'}`,
   LISTS: '/lists',
-  LIST: '/list/:id'
+  LIST: (id: any = null) => `/list/${id || ':id'}`,
+  WRITE: '/write'
 }

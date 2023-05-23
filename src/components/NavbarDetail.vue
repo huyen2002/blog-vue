@@ -1,37 +1,59 @@
 <template>
-  <div class="w-full flex items-center justify-between">
-    <img src="/logo.png" alt="Vue logo" class="object-cover" />
-    <div class="relative">
-      <button @click="show = !show" class="">
-        <img src="/avatar.png" alt="avatar" class="object-cover h-12 w-12 rounded-full" />
-      </button>
-      <Transition>
-        <div v-if="show" class="absolute bg-white right-0 mt-5 rounded-md w-56 shadow-lg">
-          <router-link
-            :to="{ name: 'Home' }"
-            class="block px-4 py-2 text-sm text-textNavbar hover:bg-slate-100"
-          >
-            Home
+  <el-row :justify="'space-between'">
+    <el-col :span="12">
+      <el-row align="middle">
+        <el-col :span="4">
+          <router-link :to="{ path: Paths.POSTS }">
+            <el-image src="/logo.png" :fit="'cover'" alt="logo" />
           </router-link>
-          <router-link
-            :to="{ name: 'Posts' }"
-            class="block px-4 py-2 text-sm text-textNavbar hover:bg-slate-100"
-          >
-            Posts
+        </el-col>
+      </el-row>
+    </el-col>
+    <el-col :span="5" :pull="1">
+      <el-row :justify="'space-between'">
+        <el-col :span="2">
+          <router-link :to="{ path: Paths.WRITE }">
+            <el-button type="text" size="large" style="font-size: 1.125rem">Write</el-button>
           </router-link>
-          <router-link
-            :to="{ name: 'Lists' }"
-            class="block px-4 py-2 text-sm text-textNavbar hover:bg-slate-100"
-          >
-            Lists
-          </router-link>
-        </div>
-      </Transition>
-    </div>
-  </div>
+        </el-col>
+        <el-col :span="1">
+          <el-dropdown size="large">
+            <el-row :align="'middle'" :gutter="40">
+              <el-col :span="12">
+                <el-avatar src="/avatar.png" />
+              </el-col>
+              <el-col :span="12">
+                <el-icon class="el-icon--right"> <ArrowDown /></el-icon>
+              </el-col>
+            </el-row>
+            <template #dropdown>
+              <el-dropdown-menu style="width: 10rem">
+                <el-dropdown-item>
+                  <router-link :to="{ path: Paths.HOME }">Home</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link :to="{ path: Paths.POSTS }">Posts</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link :to="{ path: Paths.LISTS }">Lists</router-link>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </el-col>
+      </el-row>
+    </el-col>
+  </el-row>
 </template>
 <script lang="ts">
+import { Paths } from '@/router/Paths'
+
 export default {
+  computed: {
+    Paths() {
+      return Paths
+    }
+  },
   data() {
     return {
       show: false

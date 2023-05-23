@@ -1,12 +1,13 @@
-import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import DetailLayout from '@/layouts/DetailLayout.vue'
 import { Paths } from '@/router/Paths'
 import HomeView from '@/views/HomeView.vue'
-import ListsView from '@/views/ListsView.vue'
-import ListView from '@/views/ListView.vue'
 import PostsView from '@/views/PostsView.vue'
 import PostView from '@/views/PostView.vue'
+import ListsView from '@/views/ListsView.vue'
+import ListView from '@/views/ListView.vue'
+import WriteView from '@/views/WriteView.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -19,10 +20,10 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: Paths.DETAIL,
-    component: DefaultLayout,
+    component: DetailLayout,
     children: [
       {
-        path: Paths.POST,
+        path: Paths.POST(),
         component: PostView
       },
       {
@@ -30,15 +31,19 @@ const routes: RouteRecordRaw[] = [
         component: ListsView
       },
       {
-        path: Paths.LIST,
+        path: Paths.LIST(),
         component: ListView
+      },
+      {
+        path: Paths.WRITE,
+        component: WriteView
       }
     ]
   }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory('/'),
+  history: createWebHistory('/'),
   routes
 })
 export default router
