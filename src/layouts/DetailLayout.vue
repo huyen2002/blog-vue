@@ -13,7 +13,7 @@
     ></el-col>
   </el-row>
 </template>
-<script setup>
+<script lang="ts" setup>
 import NavbarDetail from '@/components/NavbarDetail.vue'
 </script>
 <style>

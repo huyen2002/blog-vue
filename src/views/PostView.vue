@@ -74,13 +74,13 @@ const route = useRoute()
 const dialogFormVisible = ref(false)
 const post = PostService.getPostById(String(route.params.id))
 
-const selectedCheckbox = ref<string[]>(post.lists ?? [])
+const selectedCheckbox = ref<string[]>(post?.lists ?? [])
 const nameList = ref<string>('')
 const readLists = ref<List[]>(ListService.getAll())
 
 const handleChecked = (id: string) => {
-  PostService.bookmarkPost(post.id as string, id)
-  ListService.bookmarkList(post.id as string, id)
+  PostService.bookmarkPost(post?.id as string, id)
+  ListService.bookmarkList(post?.id as string, id)
 }
 const handleSuccess = () => {
   if (nameList.value.trim() !== '') {
@@ -96,6 +96,6 @@ const handleSuccess = () => {
 }
 
 onMounted(() => {
-  selectedCheckbox.value = post.lists ?? []
+  selectedCheckbox.value = post?.lists ?? []
 })
 </script>
