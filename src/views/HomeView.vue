@@ -44,17 +44,8 @@
   </DefaultLayout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import LogoComponent from '@/components/LogoComponent.vue'
 import { Paths } from '@/router/Paths'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
-
-export default {
-  computed: {
-    Paths() {
-      return Paths
-    }
-  },
-  components: { DefaultLayout, LogoComponent }
-}
 </script>

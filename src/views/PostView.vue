@@ -1,4 +1,5 @@
 <template>
+  <SuccessAlertComponent ref="successAlert" />
   <div class="mt-20">
     <el-row :justify="'space-between'">
       <el-col :span="20">
@@ -42,18 +43,12 @@
                 </el-checkbox-group>
               </el-dropdown-item>
               <el-dropdown-item>
-                <el-button text @click="dialogFormVisible = true"> Create a new list </el-button>
+                <el-button text @click="handleDialogOpen"> Create a new list </el-button>
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-dialog v-model="dialogFormVisible" title="Create a new list">
-          <el-input v-model="nameList" placeholder="Enter name" />
-          <div style="margin-top: 2rem">
-            <el-button type="primary" @click="handleSuccess"> Confirm </el-button>
-            <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          </div>
-        </el-dialog>
+        <DialogComponent ref="dialog" @success="updateIsSuccess" />
       </el-col>
     </el-row>
     <div style="margin-top: 2rem">
@@ -69,32 +64,30 @@ import { onMounted, ref } from 'vue'
 import { PostService } from '@/services/PostService'
 import { ListService } from '@/services/ListService'
 import type { List } from '@/models/List'
+import DialogComponent from '@/components/icons/DialogComponent.vue'
+import SuccessAlertComponent from '@/components/SuccessAlertComponent.vue'
 
 const route = useRoute()
-const dialogFormVisible = ref(false)
+const dialog = ref()
+const successAlert = ref()
+const isSuccess = ref(false)
+const handleDialogOpen = () => {
+  console.log(dialog.value)
+  dialog.value.handleOpen()
+}
 const post = PostService.getPostById(String(route.params.id))
-
 const selectedCheckbox = ref<string[]>(post?.lists ?? [])
-const nameList = ref<string>('')
 const readLists = ref<List[]>(ListService.getAll())
 
 const handleChecked = (id: string) => {
   PostService.bookmarkPost(post?.id as string, id)
   ListService.bookmarkList(post?.id as string, id)
 }
-const handleSuccess = () => {
-  if (nameList.value.trim() !== '') {
-    ListService.create({
-      id: String(readLists.value?.length + 1),
-      name: nameList.value,
-      posts: []
-    })
-  }
+const updateIsSuccess = () => {
+  isSuccess.value = true
+  successAlert.value.handleShow()
   readLists.value = ListService.getAll()
-  dialogFormVisible.value = false
-  nameList.value = ''
 }
-
 onMounted(() => {
   selectedCheckbox.value = post?.lists ?? []
 })

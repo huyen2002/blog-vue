@@ -12,6 +12,8 @@ declare module '@vue/runtime-core' {
     BookmarkFillIcon: typeof import('./src/components/icons/BookmarkFillIcon.vue')['default']
     BookmarkIcon: typeof import('./src/components/icons/BookmarkIcon.vue')['default']
     DeleteIcon: typeof import('./src/components/icons/DeleteIcon.vue')['default']
+    DialogComponent: typeof import('./src/components/icons/DialogComponent.vue')['default']
+    ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
@@ -32,11 +34,13 @@ declare module '@vue/runtime-core' {
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElText: typeof import('element-plus/es')['ElText']
     IconSearch: typeof import('./src/components/icons/IconSearch.vue')['default']
+    LoadingButtonComponent: typeof import('./src/components/LoadingButtonComponent.vue')['default']
     LogoComponent: typeof import('./src/components/LogoComponent.vue')['default']
     NavbarComponent: typeof import('./src/components/NavbarComponent.vue')['default']
     NavbarDetail: typeof import('./src/components/NavbarDetail.vue')['default']
     PopupComponent: typeof import('./src/components/PopupComponent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SuccessAlertComponent: typeof import('./src/components/SuccessAlertComponent.vue')['default']
   }
 }

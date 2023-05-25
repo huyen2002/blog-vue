@@ -34,6 +34,6 @@ import { useRoute } from 'vue-router'
 import { ListService } from '@/services/ListService'
 import { Paths } from '@/router/Paths'
 const route = useRoute()
-const readList = ListService.getOneWhereId(String(route.params.id))
+const readList = ListService.getOneWhereId(route.params.id as string)
 const posts = ListService.getPostsForList(String(route.params.id))
 </script>

@@ -12,35 +12,41 @@
       </div>
     </el-row>
 
-    <el-space direction="vertical">
-      <div v-for="post in postsArr" :key="post.id" style="margin: 1rem 0">
-        <el-row :gutter="10" :align="'middle'">
-          <el-col :span="1">
-            <el-avatar :src="post.avatar" alt="avatar" />
-          </el-col>
-          <el-col :span="10">
-            <el-row>
-              <el-col>
-                <el-text tag="b" style="font-size: 1.125rem">{{ post.author }}</el-text>
+    <el-row>
+      <el-col :span="24">
+        <el-row v-for="post in postsArr" :key="post.id" style="margin: 1rem 0">
+          <el-col>
+            <el-row :gutter="10" :align="'middle'">
+              <el-col :span="1">
+                <el-avatar :src="post.avatar" alt="avatar" />
               </el-col>
-              <el-col>
-                <el-text style="font-size: 1rem">{{ post.updatedAt }}</el-text>
+              <el-col :span="10">
+                <el-row>
+                  <el-col>
+                    <el-text tag="b" style="font-size: 1.125rem">{{ post.author }}</el-text>
+                  </el-col>
+                  <el-col>
+                    <el-text style="font-size: 1rem">{{ post.updatedAt }}</el-text>
+                  </el-col>
+                </el-row>
               </el-col>
             </el-row>
           </el-col>
+          <el-col>
+            <router-link :to="Paths.POST(post.id)">
+              <el-row>
+                <el-col>
+                  <el-text tag="b" style="font-size: 1.125rem">{{ post.title }}</el-text>
+                </el-col>
+                <el-col>
+                  <el-text>{{ post.description }}</el-text>
+                </el-col>
+              </el-row>
+            </router-link>
+          </el-col>
         </el-row>
-        <router-link :to="Paths.POST(post.id)">
-          <el-row>
-            <el-col>
-              <el-text tag="b" style="font-size: 1.125rem">{{ post.title }}</el-text>
-            </el-col>
-            <el-col>
-              <el-text>{{ post.description }}</el-text>
-            </el-col>
-          </el-row>
-        </router-link>
-      </div>
-    </el-space>
+      </el-col>
+    </el-row>
   </DefaultLayout>
 </template>
 
